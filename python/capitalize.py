@@ -4,19 +4,19 @@ import math, os, random, re, sys
 
 
 
-
+# Complete the solve function below.
 def solve(s):
-    print(len(s))
-    ans = s.split()
-    b = [a.capitalize() for a in ans]
-    string  = ""
-    for ele in b:
-        string = string + ele + " "
-    string = string[:-1]
-    print(string)
-    print(len(string))
-
-
+    ans = s.split(" ")
+    capitalize  = [_.capitalize() for _ in ans]
+    answer = ""
+    for ele in capitalize:
+        answer = answer + ele + " "
+    answer = answer[:-1]
+    return answer
+    
+    
 if __name__ == '__main__':
-    a = 'a string of characters'
-    solve(a)
+    s = input()
+
+    result = solve(s)
+    print(result)
