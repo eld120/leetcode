@@ -7,4 +7,4 @@ I spend too much time messing around locally without any documented proof of tim
 - functional programming
 
 
-more to come...
+
