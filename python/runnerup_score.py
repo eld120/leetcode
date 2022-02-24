@@ -1,21 +1,45 @@
 
 
 def main():
+    # # n = int(input())
+    # # arr = map(int, input().split())
     
-    # n = int(input())
-    arr = map(int, "2564567")
+    # import pdb
+    # #arr = int(input())
+    # arr = list(map(int, "23665"))
+    # #breakpoint()
+    # lst = [max(arr), -100]
     
-    lst = [max(arr), -100]
-    for num in arr:
-        if num == lst[0]:
-            continue
-        elif num > lst[1]:
-            lst[1] = num
+    # for num in arr:
+    #     #breakpoint()
+    #     if num == lst[0]:
+    #         continue
+    #     elif num > lst[1]:
+    #         lst[1] = num
             
-    if lst[1] == -100:
-        print(lst[0])
+    # if lst[1] == -100:
+    #     print(lst[0])
+    # else:
+    #     print(lst[1])
+
+    n = int(input())
+    arr = list(map(int, input().split()))
+    
+    answer_list = [max(arr), -100]
+    
+    for num in arr:
+        if num == answer_list[0]:
+            continue
+        elif num > answer_list[1]:
+            answer_list[1] = num
+    
+    if answer_list[1] == -100:
+        print(answer_list[0])
     else:
-        print(lst[1])
+        print(answer_list[1])
+            
+
+
 
 
 
