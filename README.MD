@@ -5,6 +5,7 @@ I spend too much time messing around locally without any documented proof of tim
 - ideal use of python/javascript
 - regular expressions
 - functional programming
+- learning a(nother) statically typed language (C#)
 
 
 
