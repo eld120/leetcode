@@ -6,26 +6,18 @@
 bool program = true;
 while (program == true)
 {
-    
     Console.WriteLine("please enter a number or type quit");
 
     int answer;
-    // Parse string to int - hopefully TryParse has some exception handling
-    //try
-    ///{
+   
     var userAnswer = int.TryParse(Console.ReadLine(), out answer);
-    //}
-    // Catch null exception
-    //catch (NullReferenceException)
-    //{
-    //Console.WriteLine("Please enter a number");
-    //}
-    // fizz buzz logic goes here
+    
     if (userAnswer == false)
     {
-        program == false;
+        program = false;
+        break;
     }
-    if (answer % 15 == 0)
+    if (answer % 15 == 0 )
     {
         Console.WriteLine("fizz buzz");
     }
