@@ -1,12 +1,11 @@
 def mutate_string(string, position, character):
-    substring = string[:position] + character + string[position+1:]
-    
+    substring = string[:position] + character + string[position + 1 :]
+
     return substring
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = input()
-    i,c = input.split()
-    s_new = mutate_string(s, int(i),c)
+    i, c = input.split()
+    s_new = mutate_string(s, int(i), c)
     print(s_new)

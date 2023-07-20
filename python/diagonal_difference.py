@@ -13,6 +13,7 @@ import sys
 # The function accepts 2D_INTEGER_ARRAY arr as parameter.
 #
 
+
 def diagonalDifference(arr):
     # Write your code here
     print(arr)
@@ -25,13 +26,11 @@ def diagonalDifference(arr):
         ans2 = ans2 + length[decrementor]
         iterator += 1
         decrementor -= 1
-    
+
     return answer - ans2
-            
 
-if __name__ == '__main__':
-    
 
+if __name__ == "__main__":
     n = int(input().strip())
 
     arr = []
