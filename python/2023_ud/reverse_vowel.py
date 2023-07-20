@@ -1,6 +1,6 @@
 def reverseVowels(s: str) -> str:
     # string -> (vowel, index) -> string
-    vowels = "aeiouAEIOU"
+    vowels = set("aeiouAEIOU")
 
     vowel_set = [letter for letter in s if letter in vowels]
 
