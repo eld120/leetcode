@@ -38,7 +38,9 @@ def removeDuplicates(nums: List[int]) -> int:
         # return len(nums)
     
     
-     
+        # I was frustratingly close to this answer. never knew wtf [:] was
+        # nums[:] = list(sorted(set(nums)))
+        # return len(nums)
 
 
 if __name__ == '__main__':
