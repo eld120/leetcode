@@ -6,12 +6,9 @@ data_three = [1,2] # row=1, col=1
 d_four = [3]
 
 def construct2DArray(original: List[int], rows: int, cols: int) -> List[List[int]]:
-    if len(original) > rows * cols:
-        
+    if len(original) != rows * cols:
         return []
-    elif len(original) < rows * cols:
-        
-        return [] 
+    
     counter = 0
     increment = cols
     new_arr = []
