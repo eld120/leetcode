@@ -1,4 +1,5 @@
 from typing import List
+from array import array
 
 
 test_one = [1, 1, 1, 2, 2, 3]
@@ -18,7 +19,7 @@ test_six = [1, 1, 1, 1]
 #         return index
 
 
-def last_index(arr, value):
+def last_index(arr: array('i'), value):
     """returns the last index of a given value within a List"""
     for index, val in enumerate(arr):
         if val > value:
@@ -43,7 +44,7 @@ def value_swap(arr, value):
         index += 1
 
 
-def value_count(arr: List, value: int, index=0, count=0):
+def value_count(arr: array('i'), value: int, index=0, count=0):
     """returns the count of a given value in a List
     used recursion because why not
     """
@@ -60,7 +61,7 @@ def value_count(arr: List, value: int, index=0, count=0):
             return count
 
 
-def removeDuplicates(nums: List[int]) -> int:
+def removeDuplicates(nums: array('i')) -> int:
     for val in nums:
         # count how many values are in the array
         values = value_count(nums, val)
