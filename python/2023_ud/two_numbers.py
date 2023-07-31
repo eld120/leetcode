@@ -15,40 +15,40 @@ l_five = [0]
 l_six = [0]
 
 
-def do_math_stuff(x: int, y: int) -> tuple[int, int]:
-    larger: int = x if x > y else y
-    smaller: int = x if x <= y else y
-    index_minus_one: int = (larger + smaller) // 10
-    remainder: int = (larger + smaller) % 10
+def do_math_stuff(val_one: int, val_two: int) -> tuple[int, int]:
+    index_minus_one: int = (val_one + val_two) // 10
+    remainder: int = (val_one + val_two) % 10
     return (index_minus_one, remainder)
 
 
-def add_numbers(x: int, y: int, iterable: Iterable, index: int):
-    if x + y >= 10:
-        index_minus_one = do_math_stuff(x, y)
+def add_numbers(val_one: int, val_two: int, iterable: Iterable, index: int):
+    if val_one + val_two >= 10:
+        index_minus_one = do_math_stuff(val_one, val_two)
         iterable[index - 1] += index_minus_one[0]
         return index_minus_one[1]
-    return x + y
+    return val_one + val_two
 
 
 def two_numbers(one: Iterable, two: Iterable):
-    one.reverse()
-    two.reverse()
-    answer: list = []
-    if len(one) > len(two):
-        for index, num in enumerate(one):
-            try:
-                answer.append(add_numbers(num, two[index], answer, index))
-            except IndexError:
-                break
-        print(answer)
-    else:
-        for index, num in enumerate(two):
-            try:
-                answer.append(add_numbers(num, one[index], answer, index))
-            except IndexError:
-                break
-        print(answer)
+    # none of this works because the incoming datatype is a linked list
+    # one.reverse()
+    # two.reverse()
+    # answer: list = []
+    # if len(one) > len(two):
+    #     for index, num in enumerate(one):
+    #         try:
+    #             answer.append(add_numbers(num, two[index], answer, index))
+    #         except IndexError:
+    #             break
+    #     print(answer)
+    # else:
+    #     for index, num in enumerate(two):
+    #         try:
+    #             answer.append(add_numbers(num, one[index], answer, index))
+    #         except IndexError:
+    #             break
+    #     print(answer)
+    pass
 
 
 if __name__ == "__main__":
