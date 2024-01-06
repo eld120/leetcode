@@ -24,12 +24,12 @@ if __name__ == '__main__':
                 for inst in val:
                     if inst == 'Z':
                         counter['Z'] += 1
-        reference = 0
+        reference = 999999999999999
         ans = []
         for val in counter:
             if counter[val] == reference:
                 ans.append(val)
-            elif counter[val] > reference:
+            elif counter[val] < reference:
                 ans = []
                 reference = counter[val]
                 ans.append(val)
