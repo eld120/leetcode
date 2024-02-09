@@ -13,8 +13,8 @@ if __name__ == '__main__':
             if len(country) < shortest_length:
                 # how do we feel about calling len 2x considering it's read from a struct under the hood - I think
                 shortest_length = len(country)
-                shortest_country_names = []
-                shortest_country_names.append(country)
+                shortest_country_names = [country]
+                
             elif len(country) == shortest_length:
                 shortest_country_names.append(country)
         print(shortest_country_names)
