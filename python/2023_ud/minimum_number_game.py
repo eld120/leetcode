@@ -51,3 +51,8 @@ def test_one():
 
 def test_two():
     assert number_game([5,4,2,3]) == [3,2,5,4]
+
+
+# Notes: 
+    #1 had to scrap the loop over nums because as we remove elements from nums we won't ever get to all of the elements in nums. We could have captured the length of nums at the start and looped over that number - this is sorta what ended up happening as I iterated over the length of arr/the destination list.
+    #2 scrapped List.insert because that method preserves all of the values within the list. Instead I used the same index that would have been passed to the insert method and changed the value at that index instead.
