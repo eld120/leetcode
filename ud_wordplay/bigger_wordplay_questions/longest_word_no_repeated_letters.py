@@ -1,64 +1,56 @@
 from typing import List
 
 
-def find_longest_word_no_repeated_letters():
+"""
+words is an array of strings
+"""
+# def find_longest_word_no_repeated_letters(words):    
+def sowpods_parser():
+    with open('../sowpods.txt', 'r') as file:
+        return [line.rstrip('\n') for line in file]
+
+
+
+def find_longest_word_no_repeated_letters(words: List[str]):
     """
     What is the longest word where no letter is used more than once?
+
+    Is there more than one? And what does the function want?
+
+    - What are all the longest words ...
+    - What is the first word in the list that is the longest without ... 
     """
-    with open("../sowpods.txt", "r") as file:
-        longest_word = ""
-        longest_word_length = 0
+    
+    longest_words = []
+    longest_word_length = 0
 
-        for line in file:
-            word = line.rstrip("\n")
-            letter_tracker = set()
-            for letter in word:
-                if letter in letter_tracker:
-                    break
-                else:
-                    letter_tracker.add(letter)
+    for word in words:
+        
+        letter_tracker = set()
+        if len(word) < longest_word_length:
+            continue
+        for letter in word:
+            if letter not in letter_tracker:
+                letter_tracker.add(letter)
 
-            else:
-                if len(word) > longest_word_length:
-                    longest_word = word
-                    longest_word_length = len(word)
-                elif len(word) == longest_word_length:
-                    longest_word += f",{word}"
+        if len(word) != len (letter_tracker):
+            continue
 
-    print(f"{longest_word} is/are the longest word(s) at {longest_word_length} letters")
+        if len(word) > longest_word_length:
+            longest_words = [word]
+            longest_word_length = len(word)
+        elif len(word) == longest_word_length:
+            longest_words.append(word)
+        
+    return longest_words
+    
+
 
 
 def test_one():
-    """
-    what i thought was a bug was really my code finding another word of the
-    same length but both words were concatenated so I thought it was the an error in my logix
-    """
-    longest_word = ""
-    longest_word_length = 0
-    file = ["DERMATOGLYPHICS", "DERMATOGLYPHICSUNCOPYRIGHTABLE"]
-    for line in file:
-        word = line.rstrip("\n")
-        letter_tracker = set()
-
-        for letter in word:
-            # breakpoint()
-            if letter in letter_tracker:
-                # breakpoint()
-                break
-            else:
-                # breakpoint()
-                letter_tracker.add(letter)
-        else:
-            # breakpoint()
-            if len(word) > longest_word_length:
-                # breakpoint()
-                longest_word = word
-                longest_word_length = len(word)
-            elif len(word) == longest_word_length:
-                # breakpoint()
-                longest_word += word
-    assert longest_word == "DERMATOGLYPHICS"
+    
+    assert ["DERMATOGLYPHICS", "UNCOPYRIGHTABLE"] == find_longest_word_no_repeated_letters(sowpods_parser())
 
 
 if __name__ == "__main__":
-    find_longest_word_no_repeated_letters()
+    print(find_longest_word_no_repeated_letters(sowpods_parser()))
