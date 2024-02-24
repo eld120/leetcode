@@ -1,4 +1,4 @@
-'''
+"""
 Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
  
@@ -21,19 +21,21 @@ Constraints:
 
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109
-'''
+"""
 from typing import List
 
-def containsDuplicate( nums: List[int]) -> bool:
+
+def containsDuplicate(nums: List[int]) -> bool:
     return len(set(nums)) != len(nums)
 
 
 def test_one():
-    assert containsDuplicate([1,2,3,1]) == True
+    assert containsDuplicate([1, 2, 3, 1]) == True
 
 
 def test_two():
-    assert containsDuplicate([1,2,3,4]) == False
+    assert containsDuplicate([1, 2, 3, 4]) == False
+
 
 def test_three():
-    assert containsDuplicate([1,1,1,3,3,4,3,2,4,2]) == True
+    assert containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2]) == True

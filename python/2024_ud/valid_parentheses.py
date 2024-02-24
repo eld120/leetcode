@@ -1,4 +1,4 @@
-'''
+"""
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
 An input string is valid if:
@@ -58,29 +58,24 @@ previous ans:
             else:
                 return False
         return True
-'''
+"""
 
 from collections import deque, Counter
 
 
 def is_valid(s: str) -> bool:
     # reasons to return False
-    # if we don't have an even number of chars 
+    # if we don't have an even number of chars
     count = Counter(s)
-    if count['{'] != count['}'] or count['['] != count[']'] or count['('] != count[')']:
+    if count["{"] != count["}"] or count["["] != count["]"] or count["("] != count[")"]:
         return False
 
-
     lst = deque()
-    allowed_pairs = {
-        '(' : ')',
-        '{' : '}',
-        '[' : ']'
-    }
+    allowed_pairs = {"(": ")", "{": "}", "[": "]"}
 
     index = 0
     for val in s:
-        if val in '({[':
+        if val in "({[":
             lst.append(val)
         elif index == 0:
             return False
@@ -95,26 +90,25 @@ def is_valid(s: str) -> bool:
     return True
 
 
-    
-        
-
-
-
 def test_one():
-    assert is_valid('()') == True
+    assert is_valid("()") == True
 
 
 def test_two():
     assert is_valid("()[]{}") == True
 
+
 def test_three():
     assert is_valid("(]") == False
+
 
 def test_four():
     assert is_valid("([)]") == False
 
+
 def test_five():
-    assert is_valid('[{()]}') == False
+    assert is_valid("[{()]}") == False
+
 
 def test_six():
     assert is_valid("(){}}{") == False

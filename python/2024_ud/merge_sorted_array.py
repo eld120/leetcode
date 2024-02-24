@@ -1,8 +1,8 @@
 from typing import List
 
 
-def merge_lists(nums1: List[int], m: int, nums2: List[int], n: int ) -> None:
-    '''
+def merge_lists(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    """
     You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
     Merge nums1 and nums2 into a single array sorted in non-decreasing order.
@@ -28,43 +28,44 @@ def merge_lists(nums1: List[int], m: int, nums2: List[int], n: int ) -> None:
     Explanation: The arrays we are merging are [] and [1].
     The result of the merge is [1].
     Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
-    
+
     Constraints:
     nums1.length == m + n
     nums2.length == n
     0 <= m, n <= 200
     1 <= m + n <= 200
     -109 <= nums1[i], nums2[j] <= 109
-    
+
 
     Follow up: Can you come up with an algorithm that runs in O(m + n) time?
-    '''
-    
+    """
+
     index = 0
     val_index = 0
     for val in nums1:
-        
         if index < n and val > nums2[index]:
             nums1.insert(val_index, nums2[index])
             index += 1
         elif index < n and val_index >= m + index:
-            print(nums1)
             nums1.insert(val_index, nums2[index])
             index += 1
             nums1.pop(-1)
-        elif len(nums1) > n+m:
-            while len(nums1) > n+m:
+        elif len(nums1) > n + m:
+            while len(nums1) > n + m:
                 nums1.pop(-1)
-        
-        val_index +=1
-    
+
+        val_index += 1
+
     return nums1
 
+
 def test_one():
-    assert merge_lists([1,2,3,0,0,0], 3, [2,5,6], 3) == [1,2,2,3,5,6]
+    assert merge_lists([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3) == [1, 2, 2, 3, 5, 6]
+
 
 def test_two():
     assert merge_lists([0], 0, [1], 1) == [1]
 
+
 def test_three():
-    assert merge_lists([4,0,0,0,0,0], 1, [1,2,3,5,6], 5) == [1,2,3,4,5,6]
+    assert merge_lists([4, 0, 0, 0, 0, 0], 1, [1, 2, 3, 5, 6], 5) == [1, 2, 3, 4, 5, 6]

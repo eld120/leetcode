@@ -1,4 +1,4 @@
-'''
+"""
 You are given a 0-indexed string array words, where words[i] consists of lowercase English letters.
 
 In one operation, select any index i such that 0 < i < words.length and words[i - 1] and words[i] are anagrams, and delete words[i] from words. Keep performing this operation as long as you can select an index that satisfies the conditions.
@@ -35,7 +35,7 @@ Constraints:
 1 <= words.length <= 100
 1 <= words[i].length <= 10
 words[i] consists of lowercase English letters.
-'''
+"""
 from typing import List
 from collections import Counter
 
@@ -45,15 +45,16 @@ def remove_anagram(words: List[str]) -> List[str]:
 
     while index < len(words) - 1:
         if Counter(words[index]) == Counter(words[index + 1]):
-            words.pop(index + 1)        
-            index =- 1
-            
+            words.pop(index + 1)
+            index = -1
+
         index += 1
     return words
 
+
 def test_one():
-    assert remove_anagram(["abba","baba","bbaa","cd","cd"]) == ["abba","cd"]
+    assert remove_anagram(["abba", "baba", "bbaa", "cd", "cd"]) == ["abba", "cd"]
+
 
 def test_two():
-    assert remove_anagram(["a","b","c","d","e"]) == ["a","b","c","d","e"]
-
+    assert remove_anagram(["a", "b", "c", "d", "e"]) == ["a", "b", "c", "d", "e"]
