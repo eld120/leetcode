@@ -39,7 +39,6 @@ def isPalindrome( sinput: str) -> bool:
     
     right = -1
     left  = 0
-    count_of_letters = 0
     left_adjust = 0
     right_adjust = 0
     is_palindrome = True
@@ -60,22 +59,42 @@ def isPalindrome( sinput: str) -> bool:
             right_adjust += 1       
         elif sinput[right] in letter_set and sinput[left] in letter_set and sinput[right].lower() != sinput[left].lower():
             is_palindrome = False
-            count_of_letters += 1
+            
         elif right *-1 > len(sinput)//2 + 1 + right_adjust or left  > len(sinput)//2 + left_adjust:
             break
         
         else:
             right -= 1
             left += 1
-            count_of_letters += 1
-
-        
-    if count_of_letters > 0:
-        return is_palindrome
-    else: 
-        return not is_palindrome
+    
+    return is_palindrome
+    
     # need to exclude strings with numbers and ignore punctuation with valid characters but exclude punctuation without characters
 
+
+def is_palindrome(inputstring: str) -> bool:
+    # still sucks can do better
+    valid_chars = set(ascii_letters + '0123456789')
+    
+    #breakpoint()
+    return [letter.lower() for letter in reversed(inputstring) if letter in valid_chars] == [letter.lower() for letter in inputstring if letter in valid_chars]
+
+
+def is_better_palindrome(sinput: str) -> bool:
+    #from collections import deque
+    valid_chars = set(ascii_letters + '0123456789')
+    right = -1
+    left = 0
+    forward = []
+    backwards = []
+    while right *-1 <= len(sinput) and left < len(sinput):
+        if sinput[right] in valid_chars:
+            backwards.append(sinput[right].lower())
+        if sinput[left] in valid_chars:
+            forward.append(sinput[left].lower())
+        left += 1
+        right -= 1
+    return forward == backwards
 
 
 
@@ -86,7 +105,7 @@ def test_two():
     assert isPalindrome("race a car") == False
 
 def test_three():
-    assert isPalindrome("amanaplanacanalpanama ") == True
+    assert isPalindrome("A man, a plan, a canal: Panama") == True
 
 def test_four():
     assert isPalindrome("0P") == False
