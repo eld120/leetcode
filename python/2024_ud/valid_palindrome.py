@@ -73,11 +73,12 @@ def isPalindrome( sinput: str) -> bool:
 
 
 def is_palindrome(inputstring: str) -> bool:
-    # still sucks can do better
+    # building a list to compare was slower than most, building a string to compare was faster than most
     valid_chars = set(ascii_letters + '0123456789')
+    #
+    s = "".join([letter.lower() for letter in inputstring if letter in valid_chars])
     
-    #breakpoint()
-    return [letter.lower() for letter in reversed(inputstring) if letter in valid_chars] == [letter.lower() for letter in inputstring if letter in valid_chars]
+    return s == s[::-1] 
 
 
 def is_better_palindrome(sinput: str) -> bool:
@@ -99,29 +100,29 @@ def is_better_palindrome(sinput: str) -> bool:
 
 
 def test_one():
-    assert isPalindrome(" ") == True
+    assert is_palindrome(" ") == True
 
 def test_two():
-    assert isPalindrome("race a car") == False
+    assert is_palindrome("race a car") == False
 
 def test_three():
-    assert isPalindrome("A man, a plan, a canal: Panama") == True
+    assert is_palindrome("A man, a plan, a canal: Panama") == True
 
 def test_four():
-    assert isPalindrome("0P") == False
+    assert is_palindrome("0P") == False
 
 
 def test_wtf():
-    assert isPalindrome("a.b,.") == False
+    assert is_palindrome("a.b,.") == False
 
 def test_i_am_tired():
-    assert isPalindrome(".,") == True
+    assert is_palindrome(".,") == True
 
 def test_wtf_edgecases():
-    assert isPalindrome("a.") == True
+    assert is_palindrome("a.") == True
 
 def test_failing_everything_now():
-    assert isPalindrome("1b1") == True
+    assert is_palindrome("1b1") == True
 
 def test_fucking_edgecases():
-    assert isPalindrome("......a.....") == True
+    assert is_palindrome("......a.....") == True
