@@ -98,6 +98,28 @@ def is_better_palindrome(sinput: str) -> bool:
     return forward == backwards
 
 
+def even_better_palindrome(sinput: str) -> bool:
+    valid_chars = set(ascii_letters + '0123456789')
+    right = len(sinput) -1
+    left = 0
+    
+    while left < right:
+        
+        
+        if sinput[right] not in valid_chars:
+            right -= 1
+        elif sinput[left] not in valid_chars:
+            left += 1
+        elif sinput[left].lower() != sinput[right].lower():
+            return False 
+        else:
+            right -= 1
+            left += 1
+        
+    return True
+
+
+
 
 def test_one():
     assert is_palindrome(" ") == True
