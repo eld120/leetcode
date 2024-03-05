@@ -53,17 +53,39 @@ def lengthOfLongestSubstring(sinput: str) -> int:
     return longest_substring
             
 
+def length_longest_substring(sinput: str) -> int:
+    if len(sinput) == 1:
+        return 1
+    longest_substring = 0
+    slow = 0
+    fast = slow +1
+    while slow < len(sinput) and longest_substring < len(sinput) - slow:
+        current = sinput[slow:fast]
+        if len(current) != len(set(current)):
+            slow +=1
+            fast = slow + 1
+        elif len(current) > longest_substring:
+            longest_substring = len(current)
+        
+        if fast >= len(sinput):
+            slow += 1
+            fast = slow + 1
+        else:
+            fast += 1
+    return longest_substring
+
+
 def test_abc_pattern():
-    assert lengthOfLongestSubstring('abcabcbb') == 3
+    assert length_longest_substring('abcabcbb') == 3
 
 def test_bbbbbbbbb():
-    assert lengthOfLongestSubstring('bbbbbbb') ==  1
+    assert length_longest_substring('bbbbbbb') ==  1
 
 def test_longest_substring_in_middle():
-    assert lengthOfLongestSubstring('pwwkew') == 3
+    assert length_longest_substring('pwwkew') == 3
 
 def test_empty_string():
-    assert lengthOfLongestSubstring(' ') == 1
+    assert length_longest_substring(' ') == 1
 
 def test_str_of_len_two():
-    assert lengthOfLongestSubstring('au') == 2
+    assert length_longest_substring('au') == 2
