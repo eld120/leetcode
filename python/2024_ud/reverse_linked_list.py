@@ -42,16 +42,12 @@ class ListNode:
 def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
     
     #init three pointers:current next, future
-    if not head:
+    if not head or not head.next:
         return head
-    
     elif head.next:
         current = head
         second = current.next
-        
         current.next = None
-    else:
-        return head
     
     # iterate through the linked list
     while second.next:
