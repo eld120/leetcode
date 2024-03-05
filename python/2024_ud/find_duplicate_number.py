@@ -39,3 +39,16 @@ def findDuplicate( nums: List[int]) -> int:
         if num == nums[fast]:
             return  nums[fast]
         fast += 1
+
+from collections import Counter
+def find_duplicate(nums: List[int]) -> int:
+    return Counter(nums).most_common(1)[0][0]
+
+def find_duplicates_again(nums: List[int]) -> int:
+    duplicates = set()
+    for num in nums:
+        if num not in duplicates:
+            duplicates.add(num)
+        else:
+            return num
+    
