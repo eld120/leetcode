@@ -1,22 +1,23 @@
 from typing import List
 
 
-def binary_find_stuff(searchable: List, hopefully_findable: int) -> int:
-
+def binary_find_stuff(searchable: List[int], hopefully_findable: int) -> int:
+    '''
+    now returns the index of the value of hopefully_findable or -1 if not found
+    '''
     high = len(searchable)
     low = 0
-    # if hopefully_findable > high or hopefully_findable < low:
-    #     raise ValueError
+    
     while low <= high:
         midpoint = (high + low)//2
         if hopefully_findable == searchable[midpoint]:
             return midpoint
         elif hopefully_findable < searchable[midpoint] :
-            # does the following need to be midpoint - 1? what edge case does this cover?
+            
             high = midpoint 
         else:
             low = midpoint + 1
-        
+    return -1
 
 def test_lower_bound():
     assert binary_find_stuff([1,2,3,4,5,6,7], 2) == 1
