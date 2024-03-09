@@ -39,10 +39,76 @@ def alphabet_chain(sowpods_list=parse_sowpods()):
     return alphabet_chain_words
 
 
+def longest_alphabet_chain_in_word(input_string: str):
+    '''
+    given a string of uknown length eg 'FEEDBACK'
+    
+    -> FOODBUCK
+
+
+    sorted word - 'ABCDEEFK' - needs to be compared to the alphabet 'ABCDEFG'
+    also consider removing duplicates (perhaps turn the sorted word into a set)
+    
+    - need to define the start/end of the alphabet chain:
+    base case is first letter in sorted word == beginning of the alphabet
+        - find out where I need to start in the alphabet via a dictionary (key=letter, value=index in the alphabet)
+        - if the first sorted letter in my word is C : we'd immediately know where to start looking in the alphabet
+        - iterate through the letters in the sorted word, use dict lookup (or compare incrementing slice of word with slice of alphabet)
+
+
+    
+    TURQUOISED
+    ['D', 'E', 'I', 'O', 'Q', 'R', 'S', 'T', 'U', 'U']
+    need a variable to track the longest alphabet chain
+    DE currently longest alphabet chain
+    QRS currently longest alphabet chain
+    QRST
+    QRSTU is the longest alphabet 
+
+    tracking the longest alphabet chain
+    alphabet_chain_start and alphabet_chain_end pointers
+    current_alphabet_chain
+    
+
+    FEEDBACK
+    sorted(set(FEEDBACK))
+    ['A', 'B', 'C', 'D', 'E', 'F', 'K']
+    A
+    AB
+    ABC
+    ABCD
+    ABCDEF
+    '''
+    
+    longest_alphabet_chain = []
+    current_alphabet_chain = []
+    #breakpoint()
+    # ['D', 'E', 'I', 'O', 'Q', 'R', 'S', 'T', 'U', 'U']
+    for char in sorted(set(input_string)):
+        print(f'current_alphabet_chain: {current_alphabet_chain}')
+        print(f'longest_alphabet_chain: {longest_alphabet_chain}')
+        print(f'char: {char}')
+        if not current_alphabet_chain:
+            current_alphabet_chain.append(char)
+        elif ord(current_alphabet_chain[-1]) + 1 == ord(char):
+            current_alphabet_chain.append(char)
+        else:
+            if len(current_alphabet_chain) > len(longest_alphabet_chain):
+                longest_alphabet_chain = current_alphabet_chain
+            current_alphabet_chain = [char]
+    if len(current_alphabet_chain) > len(longest_alphabet_chain):
+        longest_alphabet_chain = current_alphabet_chain
+    return longest_alphabet_chain
+    
+
+
+
+
+
 def test_feedback():
     assert alphabet_chain(['FEEDBACK', 'NOTAWORD', '', 'FEEDBACKS', 'ZZZ']) == ['FEEDBACK', 'FEEDBACKS']
 
 
 
 if __name__ == '__main__':
-    print(alphabet_chain())
+    print(longest_alphabet_chain_in_word('TURQUOISED'))
