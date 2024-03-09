@@ -1,5 +1,3 @@
-
-
 def find_lotsa_double_letters():
     """
     What are all of the words that have at least 3 different double letters? For example, “BOOKKEEPER” is an answer to this question because it has a double-O, a double-K, and a double-E.
@@ -25,8 +23,8 @@ def find_lotsa_double_letters():
 
 
 def test_one():
-    assert 'BOOKKEEPER' in find_lotsa_double_letters()
-    
+    assert "BOOKKEEPER" in find_lotsa_double_letters()
+
+
 def test_later_results():
-    assert 'UNGUESSED' in find_lotsa_double_letters() 
-    
+    assert "UNGUESSED" in find_lotsa_double_letters()
