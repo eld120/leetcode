@@ -62,9 +62,9 @@ def min_array(rotated_array):
     right_subarray = rotated_array[:midpoint]
 
     while True:
-        if left_subarray[-1] > right_subarray[-1] and  len(right_subarray) == 1:
+        if left_subarray[-1] > right_subarray[0] and  len(right_subarray) == 1:
             return right_subarray[0]
-        elif left_subarray[-1] < right_subarray[-1] and  len(left_subarray) == 1:
+        elif left_subarray[0] < right_subarray[-1] and  len(left_subarray) == 1:
             return left_subarray[0]
         
         if left_subarray[-1] > right_subarray[-1]:
