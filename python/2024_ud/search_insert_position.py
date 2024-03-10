@@ -44,19 +44,14 @@ def searchInsert(nums: List[int], target: int) -> int:
 
     while left < right:
         midpoint = (left + right) // 2
-        # if nums[midpoint] == target:
-        #     return midpoint
         if target > nums[midpoint]:
             left = midpoint + 1
         else:
             right = midpoint
 
-    return left # something
-    # if nums[midpoint] > target:
-    #     return midpoint
-    # else:
-    #     return midpoint + 1
+    return left
     
+
 
 def test_number_within_list():
     assert searchInsert([1,3,5,6], 5) == 2
