@@ -54,24 +54,39 @@ def lengthOfLongestSubstring(sinput: str) -> int:
             
 
 def length_longest_substring(sinput: str) -> int:
-    if len(sinput) == 1:
-        return 1
+    '''
+    string as input - 'abcdd' - 'adbdwlerkjwlrjq'
+    look for longest substring w/o repeating chars
+    use a window, initialized at size 1
+    current_substring, longest_substring
+
+    using a set to track unique chars
+    within loop
+        if char is not in set - add, we'll be peeking at sinput[right] for our next char
+            
+        if char is found in set -> not add - record length of the current substring
+            remove/increment left char/pointer
+
+    '''
+    if len(sinput) <= 1:
+        return len(sinput)
+    
     longest_substring = 0
-    slow = 0
-    fast = slow +1
-    while slow < len(sinput) and longest_substring < len(sinput) - slow:
-        current = sinput[slow:fast]
-        if len(current) != len(set(current)):
-            slow +=1
-            fast = slow + 1
-        elif len(current) > longest_substring:
-            longest_substring = len(current)
+    left = 0
+    right = 0
+    unique_characters = set()
+    while right < len(sinput):
         
-        if fast >= len(sinput):
-            slow += 1
-            fast = slow + 1
+        if sinput[right] not in unique_characters:
+            unique_characters.add(sinput[right])
+            if right - left + 1 > longest_substring:
+                longest_substring = right - left + 1
+            right += 1
         else:
-            fast += 1
+            
+            unique_characters.remove(sinput[left])
+            left += 1
+
     return longest_substring
 
 
@@ -89,3 +104,12 @@ def test_empty_string():
 
 def test_str_of_len_two():
     assert length_longest_substring('au') == 2
+
+def test_empty_str():
+    assert length_longest_substring('') == 0
+
+def test_sol_at_start():
+    assert length_longest_substring('abcddddddq') == 4
+
+def test_sol_at_end():
+    assert length_longest_substring('abcababddddddlwiroqpuzyx') == 12
