@@ -17,16 +17,21 @@ from typing import List
 
 
 def twoSum(nums: List[int], target: int) -> List[int]:
+    """
+    even slower than the original due to the extra list/enumerate generation plus On**2 time complexity
+    """
     result = None
     slow = 0
     fast = 1
-
+    index = 0
+    value = 1
+    nums = sorted(enumerate(nums))
     while result != target:
         try:
-            result = nums[slow] + nums[fast]
+            result = nums[slow][value] + nums[fast][value]
             if target > 1:
                 if result == target:
-                    return [slow, fast]
+                    return [nums[slow][index], nums[fast][index]]
                 # elif result < target:
                 #    fast += 1
                 else:
@@ -35,8 +40,8 @@ def twoSum(nums: List[int], target: int) -> List[int]:
                     fast += 1
             else:
                 if result == target:
-                    return [slow, fast]
-                # elif result > target or nums[slow] + nums[fast+1] > target:
+                    return [nums[slow][index], nums[fast][index]]
+                # elif result > target or nums[slow][value] + nums[fast][value] > target:
                 #     fast += 1
                 else:
                     # slow += 1
@@ -79,6 +84,10 @@ def test_seven():
 
 def test_eight():
     assert twoSum([3, 2, 95, 4, -3], 92) == [2, 4]
+
+
+def test_nine():
+    assert twoSum([0, 3, -3, 4, -1], -1) == [0, 4]
 
 
 if __name__ == "__main__":
