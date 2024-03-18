@@ -30,3 +30,30 @@ def find_diff(nums1: List[int], nums2: List[int]) -> List[List[int]]:
     '''
     
     return [list({val for val in nums1 if val not in set(nums2)}), list({val for val in nums2 if val not in set(nums1)})]
+
+
+def find_diff_faster(nums1: List[int], nums2: List[int]) -> List[List[int]]:
+    '''
+    Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
+
+    answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+    answer[1] is a list of all distinct integers in nums2 which are not present in nums1.
+    Note that the integers in the lists may be returned in any order.
+    '''
+    num1 = set(nums1)
+    num2 = set(nums2)
+    dup = set()
+    dup2 = set()
+    ans = []
+    for val in nums1:
+        if val not in num2 and val not in dup:
+            ans.append(val)
+            dup.add(val)
+
+    ans2 = []
+    for val in nums2:
+        if val not in num1 and val not in dup2:
+            ans2.append(val)
+            dup2.add(val)
+
+    return [ans, ans2]
