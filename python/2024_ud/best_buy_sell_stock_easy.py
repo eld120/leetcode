@@ -32,3 +32,4 @@ def max_profit(prices: List[int]) -> int:
             left = right
 
         right += 1
+    return max_price
