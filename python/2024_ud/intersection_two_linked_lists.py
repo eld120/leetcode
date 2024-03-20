@@ -56,28 +56,25 @@ def get_intersection_again(headA, headB):
     while a is not None:
         ll_a_len += 1
         a = a.next
-    
-    
     # traverse the entirety of head_b + record the length
     while b is not None:
         ll_b_len += 1
         b = b.next
-    # take the diff between head_a and head_b
+    # take the diff between head_a and head_b - below
     diff = abs(ll_b_len - ll_a_len)
     # advance the pointer of the longer LL by the diff between a + b
     longer = headA if ll_a_len > ll_b_len else headB
     shorter = headB if ll_a_len > ll_b_len else headA
     #breakpoint()
-    while diff > 0:
+    while diff  > 0:
         longer = longer.next
         diff -= 1
-    if longer == shorter:
-        return longer
-    while longer is not None:    
+    while longer is not None:   
+        if longer == shorter:
+            return longer 
         longer = longer.next
         shorter = shorter.next
-        if longer == shorter:
-            return longer
+        
     return None
     
     
