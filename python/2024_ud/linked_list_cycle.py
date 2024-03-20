@@ -40,9 +40,18 @@ from typing import Optional
 
 
 class ListNode:
-    def __init__(self, val, next) -> None:
+    def __init__(self, val=0, nxt=None) -> None:
         self.val = val
-        self.next = next
+        self.next = nxt
+
+    def __repr__(self) -> str:
+        return f'val: {self.val}, next: {self.next}'
+    
+    def __str__(self) -> str:
+        return self.__repr__()
+
+    def __eq__(self, other) -> bool:
+        return self.__str__() == other.__str__()
 
 
 def hasCycle( head: Optional[ListNode]) -> bool:
@@ -63,3 +72,32 @@ def hasCycle( head: Optional[ListNode]) -> bool:
         if head is None or head.next is None:
             return False
         head = head.next
+
+
+def has_cycle(head: ListNode) -> bool:
+    fast = head
+    slow = head
+    while fast and fast.next and fast.next.next:
+        fast = fast.next.next
+        slow = slow.next
+        if slow == fast:
+            return True
+    return False
+
+
+def build_ll(incoming) -> ListNode:
+    head = ListNode()
+    current = head
+    for index, val in enumerate(incoming):
+        current.val = val
+        if index < len(incoming) -1:
+            current.next = ListNode()
+            current = current.next
+    return head
+
+def test_ll_builder():
+    assert build_ll([1,2,1,3,5]) == ListNode(1,ListNode(2, ListNode(1,ListNode(3,ListNode(5)))))
+
+def test_small_ll():
+    assert has_cycle(build_ll([1,2,3,4,5])) == False
+
