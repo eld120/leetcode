@@ -19,11 +19,25 @@ def replace_elements(arr: List[int]) -> List[int]:
             arr[index] = highest
     return arr
 
+def replace_element_two(arr: List[int]) -> List[int]:
+    highest = -1
+    index = -1
+    for val in reversed(arr):
+        
+        arr[index] = highest
+        if val > highest:
+            highest = val
+        index -= 1
+    return arr
+
+
+
+
 
 
 def test_one():
-    assert replace_elements([17,18,5,4,6,1]) == [18,6,6,6,1,-1]
+    assert replace_element_two([17,18,5,4,6,1]) == [18,6,6,6,1,-1]
 
 
 def test_two():
-    assert replace_elements([400]) == [-1]
+    assert replace_element_two([400]) == [-1]
