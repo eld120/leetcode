@@ -78,55 +78,147 @@ def three_sum(nums: List[int]) -> List[int]:
     '''
     if len(nums) == 3 and nums[0] + nums[1] + nums[2] == 0:
         return [nums]
-
-    sorted_list = nums.sort()
-    duplicates = set()
-    
-    answers = []
-    
-    
-    for index, num in enumerate(sorted_list):
-        #breakpoint()
-        if num not in duplicates:
-            duplicates.add(num)
-            
-        left = index
+    nums.sort()
+    answers = dict()
+    for index, num in enumerate(nums):
+        # if nums[index] == nums[index+1] and index < len(nums)-3:
+        #     index+= 1
+        if index == len(nums)-2:
+            break
+        left = index + 1
         right  = len(nums) -1
-        
-        # Input: nums = [-1,0,1,2,-1,-4]
-        # sorted_nums = [-4,-1,-1,0,1,2]
-        # first solution = [[-1,0,2]]
-        # could focus on next sub-solution: [-1,0,1,2]
-        # Output: [[-1,-1,2],[-1,-1,2]]
-        while left < right:
-            
-            if index == left:
-                left += 1
-            elif index == right:
-                right -= 1
-            
-
-            current_sum = num + sorted_list[left] + sorted_list[right]
+        while left < right and index < len(nums)-3:
+            #breakpoint()
+            current_sum = num + nums[left] + nums[right]
             if current_sum > 0:
                 right -= 1
             elif current_sum < 0:
                 left += 1
             elif left != right:
-                answer = [num, sorted_list[left], sorted_list[right]]
-                hashable = tuple(sorted(answer))
-                if hashable in duplicates :
-                    left += 1
-                    right -= 1
-                else:
-                    answers.append(answer)
-                    duplicates.add(hashable)
-                    
-    return answers
+                answer = [num, nums[left], nums[right]]
+                hashable = "".join([str(x) for x in answer])
+                if hashable not in answers :
+                    answers[hashable] = answer
+                left+= 1
+                right -= 1
+    return [x for x in answers.values()]
 # sorted = [-2,-1,0,1,2,3] ->
 '''
 [-4,-1,2]
 '''
-            
+
+def three_sum_again(nums: List[int]) -> List[int]:
+    '''
+    Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+    Notice that the solution set must not contain duplicate triplets.
+        Input: nums = [-1,0,1,2,-1,-4]
+        Output: [[-1,-1,2],[-1,0,1]]
+    Explanation: 
+    nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+    nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+    nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+    The distinct triplets are [-1,0,1] and [-1,-1,2].
+    Notice that the order of the output and the order of the triplets does not matter.
+        Input: nums = [0,1,1]
+        Output: []
+    Explanation: The only possible triplet does not sum up to 0.
+        Input: nums = [0,0,0]
+        Output: [[0,0,0]]
+    Explanation: The only possible triplet sums up to 0.
+    Constraints:
+    3 <= nums.length <= 3000
+    -105 <= nums[i] <= 105
+    '''
+    if len(nums) == 3:
+        zero = 0
+        for val in nums:
+            zero += val
+        if zero == 0:
+            return [nums]
+    
+    answers = dict()
+    left = 0
+    middle = 1
+    right = 2
+    while left < len(nums) -3:
+        
+        current = nums[left] + nums[middle] + nums[right]
+        if current == 0:
+            key_hash = "".join([str(x) for x in sorted([nums[left], nums[middle], nums[right]])])
+            if key_hash not in answers:
+                answers[key_hash] = [nums[left], nums[middle], nums[right]]
+        if right == len(nums)-1:
+            if middle == len(nums) -2:
+                left += 1
+                middle = left + 1
+                right = middle + 1
+            else:
+                middle+= 1
+                right = middle + 1
+        else:
+            right += 1
+
+    #breakpoint()
+    return [x for x in answers.values()]
+
+
+
+
+def lol_one_more_time(nums:List[int])-> List[List[int]]:
+    if len(nums) == 3:
+        zero = 0
+        for val in nums:
+            zero += val
+        if zero == 0:
+            return [nums]
+    nums.sort()
+    left = 0
+    mid = 1
+    right = len(nums) -1
+    answers = dict()
+    
+    while left < len(nums) -3:
+        #breakpoint()
+        if mid == right:
+            left += 1
+            mid = left +1
+            right = len(nums) -1
+        current = nums[left] + nums[mid] + nums[right]
+        if current == 0:
+            hashable = "".join([str(x) for x in [nums[left], nums[mid], nums[right]]])
+            if hashable not in answers:
+                answers[hashable] = [nums[left], nums[mid], nums[right]]
+            right -= 1
+        elif current > 0:
+            if nums[right] == nums[right-1]:
+                while nums[right] == nums[right-1]:
+                    right -= 1
+                    if mid == right:
+                        left += 1
+                        mid = left +1
+                        right = len(nums) -1
+                        break
+            else:
+                right -= 1
+        else:
+            if nums[mid] == nums[mid+1]:
+                while nums[mid] == nums[mid+1]:
+                    mid += 1
+                    if mid == right:
+                        left += 1
+                        mid = left +1
+                        right = len(nums) -1
+                        break
+            else:
+                mid += 1
+    return [x for x in answers.values()]
+
+
+
+
+def test_new_stuff():
+    assert three_sum([-1,0,1,2,-1,-4]) == [[-1,-1,2],[-1,0,1]]
 
 def test_negative_positive():
     assert three_sum([-1,0,1,2,-1,-4]) == [[-1,-1,2],[-1,0,1]]
