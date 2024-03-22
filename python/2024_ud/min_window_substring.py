@@ -46,7 +46,6 @@ def min_substring(s: str, t: str) -> str:
     right = 0
     flag = True
     while left < len(s) :
-        chunk = s[left: right + 1]
         if flag and right < len(s):
             count[s[right]] += 1
             flag = False
