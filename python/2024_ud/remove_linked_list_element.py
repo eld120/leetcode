@@ -1,9 +1,9 @@
 from typing import List
 
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=0, nxt=None):
         self.val = val
-        self.next = next
+        self.next = nxt
 
     def __repr__(self):
         return f'val:{self.val}, next:{self.next}'
@@ -46,6 +46,36 @@ def remove_elements(head: ListNode, val: int) -> ListNode:
     return new_head
 
 
+def kick_ll_elements_out(head:ListNode, val: int)-> ListNode:
+    '''
+    [0,1,1,1] k = 1
+    0,
+    [1,1,1,2,2] k = 2
+    [1,3] k = 3
+    [1,1,2,3,3] k = 3
+    [1,1,2,2,3,3] k = 2 -> [1,1]
+    '''
+
+    # new_ll : ListNode
+    new_ll_head = ListNode()
+    new_ll_tail = new_ll_head
+    # iterate through head with a pointer: current
+    current = head
+    while current is not None:
+        if current.val != val:
+            new_ll_tail.next = current
+            new_ll_tail = current
+        else:
+            new_ll_tail.next = None
+        current = current.next
+        
+    return new_ll_head.next
+        # if current.next:
+        # if current.val is not val
+            # append val to new ll
+        # else:
+            # current = current.next
+
 
 
 def ll_builder(incoming: List[int]) -> ListNode:
@@ -66,22 +96,22 @@ def test_builder():
     assert ll_builder([1,2]) == ListNode(1, ListNode(2, None))
 
 def test_one():
-    assert remove_elements(ll_builder([1,3]), 3) == ll_builder([1])
+    assert kick_ll_elements_out(ll_builder([1,3]), 3) == ll_builder([1])
 
 def test_remove_duplicates():
-    assert remove_elements(ll_builder([1,2,2,3]), 2) == ll_builder([1,3])
+    assert kick_ll_elements_out(ll_builder([1,2,2,3]), 2) == ll_builder([1,3])
 
 def test_remove_at_end():
-    assert remove_elements(ll_builder([1,1,2,3,3]), 3) == ll_builder([1,1,2])
+    assert kick_ll_elements_out(ll_builder([1,1,2,3,3]), 3) == ll_builder([1,1,2])
 
 def test_remove_at_beginning():
-    assert remove_elements(ll_builder([1,1,2,3,4]), 1) == ll_builder([2,3,4])
+    assert kick_ll_elements_out(ll_builder([1,1,2,3,4]), 1) == ll_builder([2,3,4])
 
 def test_two():
-    assert remove_elements(ll_builder([1,2,6,3,4,5,6]), 6) == ll_builder([1,2,3,4,5])
+    assert kick_ll_elements_out(ll_builder([1,2,6,3,4,5,6]), 6) == ll_builder([1,2,3,4,5])
 
 def test_empty():
-    assert remove_elements(ll_builder([]), 1) == ll_builder([])
+    assert kick_ll_elements_out(ll_builder([]), 1) == ll_builder([])
 
 def test_remove_all():
-    assert remove_elements(ll_builder([7,7,7,7]), 7) == ll_builder([])
+    assert kick_ll_elements_out(ll_builder([7,7,7,7]), 7) == ll_builder([])
