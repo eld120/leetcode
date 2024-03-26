@@ -44,14 +44,14 @@ class ListNode:
         self.val = val
         self.next = nxt
 
-    def __repr__(self) -> str:
-        return f'val: {self.val}, next: {self.next}'
+    # def __repr__(self) -> str:
+    #     return f'val: {self.val}, next: {self.next}'
     
-    def __str__(self) -> str:
-        return self.__repr__()
+    # def __str__(self) -> str:
+    #     return f'val: {self.val}, next: {self.next}'
 
-    def __eq__(self, other) -> bool:
-        return self.__str__() == other.__str__()
+    # def __eq__(self, other) -> bool:
+    #     return self.__str__() == other.__str__()
 
 
 def hasCycle( head: Optional[ListNode]) -> bool:
@@ -60,8 +60,6 @@ def hasCycle( head: Optional[ListNode]) -> bool:
         
     cyclical = False
     objects_found = set()
-
-
     while not cyclical:
         
         if id(head) not in objects_found:
@@ -77,12 +75,14 @@ def hasCycle( head: Optional[ListNode]) -> bool:
 def has_cycle(head: ListNode) -> bool:
     fast = head
     slow = head
+    iterations = 0
     while fast and fast.next and fast.next.next:
         fast = fast.next.next
         slow = slow.next
+        iterations += 1
         if slow == fast:
-            return True
-    return False
+            return iterations
+    return iterations
 
 
 def build_ll(incoming) -> ListNode:
@@ -95,9 +95,44 @@ def build_ll(incoming) -> ListNode:
             current = current.next
     return head
 
+def build_ll_cycle(inc, loop_size):
+    '''
+    generates link lists of 100 nodes in lenght  # TODO What is the starting size of the loop?
+    all should have an loop
+    on each iteration the loop should be one node larger
+
+    find how many iterations does it take to find out that there is a loop
+    '''
+
+    head = ListNode()
+    current = head
+    loop_start = None
+    for index, val in enumerate(inc):
+        current.val = val
+
+        if index == loop_size:
+            loop_start = current
+        if index == len(inc)-1:
+            current.next = loop_start
+            return head
+        current.next = ListNode()
+        current = current.next
+
+#build_ll_cycle([1,2,3,4,5], 3)
+has_cycle(build_ll_cycle([x for x in range(0,10)], 9))
+
 def test_ll_builder():
     assert build_ll([1,2,1,3,5]) == ListNode(1,ListNode(2, ListNode(1,ListNode(3,ListNode(5)))))
 
 def test_small_ll():
     assert has_cycle(build_ll([1,2,3,4,5])) == False
 
+def test_ll_builder_cycle():
+    assert has_cycle( build_ll_cycle([1,2,3,4,5], 3)) == 4
+
+
+if __name__ == '__main__':
+    for num in reversed(range(0,100)):
+        
+        print(f'{num} -- {has_cycle(build_ll_cycle([x for x in range(0,100)], num))} iterations to find the loop')
+    #print(f'{99} -- {has_cycle(build_ll_cycle([x for x in range(0,100)], 99))} iterations to find the loop')
