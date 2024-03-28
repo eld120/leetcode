@@ -35,7 +35,7 @@ class KthLargest:
         self._array.append(val)
         self._array.sort()
         self._array = self._array[-self._k:]
-        return self._array[-k]
+        return self._array[-self._k]
 
 
 
