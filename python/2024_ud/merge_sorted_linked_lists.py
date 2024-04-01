@@ -27,7 +27,8 @@ The number of nodes in both lists is in the range [0, 50].
 -100 <= Node.val <= 100
 Both list1 and list2 are sorted in non-decreasing order.
 '''
-from typing import Optional
+from typing import Optional, List
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -35,9 +36,10 @@ from typing import Optional
 #         self.next = next
 
 class ListNode:
-    def __init__(self, val=0, next=None) -> None:
+    ''' Linked List'''
+    def __init__(self, val=0, nxt = None) -> None:
         self.val = val
-        self.next = next
+        self.next = nxt
 
     def __repr__(self) -> str:
         return f'val:{self.val} - next:{self.next}'
@@ -45,7 +47,10 @@ class ListNode:
     def __str__(self) -> str:
         return f'val:{self.val} - next:{self.next}'
     
-    
+    def __eq__(self, other):
+        one = self.__repr__()
+        two = other.__repr__()
+        return one == two
         
 
 
@@ -76,12 +81,12 @@ def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optio
             result_list = list1_pointer
     else:
         return result_list
-    breakpoint()
+    #breakpoint()
         
     
-
+    result_tail = None # make the linter shut up
     while list1_pointer is not None and list2_pointer is not None:
-        breakpoint()
+        #breakpoint()
         # handle LLs of unequal lengths
         if list1_pointer.next is None:
             result_tail.next = list2_pointer
@@ -209,30 +214,67 @@ def merge_ll(list1: ListNode, list2: ListNode) -> ListNode:
             list1 = list1.next
     return head
 
-list_one_two_four = ListNode(1, ListNode(2, ListNode(4, None)))
-list_one_three_four = ListNode(1, ListNode(3, ListNode(4, None)))
 
-list_also_empty = None
-list_empty =  None
 
-list_one_four = ListNode(1, ListNode(4, None))
-list_three_five_six  = ListNode(3, ListNode(5, ListNode(6, None)))
 
-single_one = ListNode(1, None)
-single_copy = ListNode(1, None)
-single_three = ListNode(3, None)
+def build_linked_list(lst_input: List) -> ListNode:
+    head = ListNode()
+    current = head
+    for index, val in enumerate(lst_input):
+        current.val = val
+        if index != len(lst_input) -1:
+            current.next = ListNode()
+            current = current.next
+    #breakpoint()
+    return head
+
+def merge_ll_again(ll_one: ListNode, ll_two:  ListNode) -> ListNode:
+    '''use recursion to merge two linked lists'''
+    head = ListNode()
+   
+    current = head
+    def merge(one: ListNode, two: ListNode, current: ListNode, head) -> None:
+       # breakpoint()
+        if not one and not two:
+            return head.next
+        current.next = ListNode()
+        current = current.next
+        if one and two:
+            if one.val > two.val:
+                current.val = two.val
+                two = two.next
+            else: 
+                current.val = one.val
+                one = one.next
+        elif one:
+            current.val = one.val
+            one = one.next
+        else:
+            current.val = two.val
+            two = two.next
+        
+        return merge(one, two, current, head)
+    return merge(ll_one,ll_two, current, head)
+
+
+
+def test_build_linked_list():
+    ''' [] -> ListNode'''
+    assert build_linked_list([1,2,3]) == ListNode(1, ListNode(2, ListNode(3, None)))
+    assert build_linked_list([1,2,3]) != ListNode(1, ListNode(1, ListNode(3, None)))
+    assert build_linked_list([]) == ListNode()
 
 def test_one_second():
-    assert str(merge_ll(list_one_two_four, list_one_three_four)) == str(ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(4, None)))))))
-
+    assert merge_ll_again(build_linked_list([1,2,4]), build_linked_list([1,3,4])) == ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(4, None))))))
+test_one_second()                                                  
 def test_second_empty():
-    assert merge_ll(list_also_empty, list_empty) is None
+    assert merge_ll(None, None) is None
 
 def test_unequal_length_second():
-    assert str(merge_ll(list_empty, list_one_four)) == str(ListNode(1,  ListNode(4,  None)))
+    assert merge_ll(None, build_linked_list([1,4])) == build_linked_list([1,4])
 
 def test_single_value_ll():
-    assert str(merge_ll(single_one, single_three)) == str(ListNode(1, ListNode(3, None)))
+    assert merge_ll(build_linked_list([1]), build_linked_list([3])) == ListNode(1, ListNode(3, None))
 
 def test_single_and_empty():
-    assert str(merge_ll(list_empty, single_copy)) == str(ListNode(1, None) )
+    assert merge_ll(None, build_linked_list([1])) == build_linked_list([1])
