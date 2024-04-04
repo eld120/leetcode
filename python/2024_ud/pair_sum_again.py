@@ -53,4 +53,4 @@ def test_example_odd_length():
     assert pair_sum([1, 9, 6, 3, 5, 4,7], 10) == [{1, 9}, {3,7},{6, 4} ]
 
 def test_empty():
-    assert pair_sum([])
+    assert pair_sum([], 0) == []
