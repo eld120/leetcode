@@ -5,7 +5,6 @@ def min_difference(nums: list[int], k: int) -> int:
     nums.sort()
     if len(nums) == k:
         return nums[-1] - nums[0]
-    #breakpoint()
     left = 0
     right =1
     diff = float('inf')
@@ -19,6 +18,8 @@ def min_difference(nums: list[int], k: int) -> int:
             
         min_diff = min(min_diff, diff)
     return min_diff
+
+
 
 
 def test_one():
