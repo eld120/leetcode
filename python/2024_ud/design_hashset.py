@@ -8,14 +8,14 @@ class ListNode:
 
 class MySet:
     def __init__(self) -> None:
-        self.container = []
+        self.container = dict()
         
-
     def add(self, key: int) -> None:
-        self.container.append(key)
+        if key not in self.container:
+            self.container[key] = key
 
     def remove(self, key: int) -> None:
-        self.container.remove(key)
+        del self.container[key]
         
     def contains(self, key: int) -> bool:
         return key in self.container
