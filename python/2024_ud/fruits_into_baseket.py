@@ -2,7 +2,8 @@
 
 
 def total_fruit(fruits: list[int]) -> int:
-    
+    if len(set(fruits)) == 1:
+        return len(fruits)
     left = 0
     right = 0
     longest_stretch = 0
