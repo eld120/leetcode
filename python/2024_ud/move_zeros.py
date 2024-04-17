@@ -6,7 +6,7 @@ def move_zeros(nums: list[int]) -> list:
     for val in nums:
         if val != 0:
             temp.append(val)
-    diff = len(nums) - len(temp)
+    
     index = 0
     while index < len(nums):
         if index < len(temp):
