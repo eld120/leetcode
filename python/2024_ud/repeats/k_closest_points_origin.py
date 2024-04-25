@@ -17,24 +17,7 @@ We only want the closest k = 1 points from the origin, so the answer is just [[-
 import heapq
 from math import sqrt
 
-def k_closest(points: list[list[int]], k: int) -> list[list[int]]:
-    vectors = dict()
-    for  point in points:
-        #breakpoint()
-        key = sqrt(point[0]**2+ point[1]**2)
-        if key not in vectors:
-            vectors[key] = [point]
-        else:
-            vectors[key] += [index]
 
-    heapthing = list(vectors.keys())
-    heapq.heapify(heapthing)
-    indices = heapq.nsmallest(k, heapthing)
-    t = [vectors[index] for index in indices]
-    # #breakpoint()
-    # return [points[inx] for inx in t]
-    for index in indices:
-        pass
 
 
 def k_closest_again(points: list[list[int]], k: int) -> list[list[int]]:
