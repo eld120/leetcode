@@ -2,8 +2,8 @@
 
 class LeetcodeStack:
 
-    def __init__(self, val:list =None) -> None:
-        self.container = [x for x in val]
+    def __init__(self) -> None:
+        self.container = []
 
     def push(self, x: int) -> None:
         self.container.append(x)
@@ -16,4 +16,4 @@ class LeetcodeStack:
         return self.container[-1]
 
     def empty(self) -> bool:
-        return self.container
+        return len(self.container) == 0
