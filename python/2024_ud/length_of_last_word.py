@@ -1,4 +1,4 @@
-'''
+"""
 Given a string s consisting of words and spaces, return the length of the last word in the string.
 
 A word is a maximal 
@@ -29,20 +29,19 @@ Constraints:
 1 <= s.length <= 104
 s consists of only English letters and spaces ' '.
 There will be at least one word in s.
-'''
+"""
+
 
 def lengthOfLastWord(s: str) -> int:
-    
     ret = []
     letter_count = 0
     for char in reversed(s):
-        if char == ' ' and letter_count > 0:
+        if char == " " and letter_count > 0:
             return len(ret)
-        elif char != ' ':
+        elif char != " ":
             letter_count += 1
             ret.append(char)
     return len(ret)
-
 
 
 def test_one():
@@ -51,6 +50,7 @@ def test_one():
 
 def test_two():
     assert lengthOfLastWord("   fly me   to   the moon  ") == 4
+
 
 def test_three():
     assert lengthOfLastWord("luffy is still joyboy") == 6

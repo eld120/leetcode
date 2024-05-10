@@ -17,19 +17,18 @@ def merge_sort(thingy: List[int]) -> List[int]:
         answer += right[r:]
         answer += left[l:]
         return answer
-    
-    if len(thingy)> 1:
-        middle = len(thingy)//2
+
+    if len(thingy) > 1:
+        middle = len(thingy) // 2
         left = thingy[:middle]
         right = thingy[middle:]
         l = merge_sort(left)
         r = merge_sort(right)
-        return merge(l,r)
-        
+        return merge(l, r)
+
     else:
         return thingy
 
-    
 
 def test_one():
-    assert merge_sort([5,4,3,2,1]) == [1,2,3,4,5]
+    assert merge_sort([5, 4, 3, 2, 1]) == [1, 2, 3, 4, 5]

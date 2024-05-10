@@ -1,5 +1,4 @@
-
-'''
+"""
 
 Tasks
 
@@ -24,10 +23,11 @@ Please implement the following:
 - A function `getRandomMonster` that takes as input a number of legs and returns a random Monster with that number of legs.
     - Example function call: `getRandomMonster(8)` → `Monster(OctopusScorpion)`
     - This function should call your `createAllMonsters` function
-'''
+"""
 import random
 from csv import DictReader
 from typing import List
+
 
 class Animal:
     def __init__(self, name: str, legs: int, sound: str) -> None:
@@ -36,21 +36,22 @@ class Animal:
         self.sound = sound
 
     def __str__(self) -> str:
-        return f'{self.name}'
+        return f"{self.name}"
 
     def __repr__(self) -> str:
         return self.__str__()
 
+
 class Monster:
     def __init__(self, head: Animal, body: Animal) -> None:
-        if head.legs != body.legs: 
-            raise RuntimeError('MUST HAVE THE SAME NUMBER OF LEGS')
+        if head.legs != body.legs:
+            raise RuntimeError("MUST HAVE THE SAME NUMBER OF LEGS")
         self.head = head
         self.body = body
-        self.name = f'{head}{body}'
-        self.sound = f'{head}{body}'
+        self.name = f"{head}{body}"
+        self.sound = f"{head}{body}"
         self.legs = self.head.legs
-        
+
     def __str__(self) -> str:
         return self.name
 
@@ -61,31 +62,31 @@ class Monster:
         return self.__str__() == __value.__str__()
 
 
-def create_all_monsters( legs:int) -> List:
-    with open('./animals.csv', 'r') as f:
+def create_all_monsters(legs: int) -> List:
+    with open("./animals.csv", "r") as f:
         # AnimalName,AnimalType,NumLegs,Sound
         reader = DictReader(f)
         all_animals = []
         for line in reader:
-            
-            if int(line['NumLegs']) == legs:
-                all_animals.append(Animal(line['AnimalName'], int(line['NumLegs']), line['Sound']))
+            if int(line["NumLegs"]) == legs:
+                all_animals.append(
+                    Animal(line["AnimalName"], int(line["NumLegs"]), line["Sound"])
+                )
         all_monsters = []
         for animal in all_animals:
             for a in all_animals:
                 if animal != a:
                     all_monsters.append(Monster(animal, a))
         return all_monsters
-        
+
+
 def get_random_monster(legs: int) -> Monster:
     monsters = create_all_monsters(legs)
-    
-    r = random.randint(0, len(monsters)-1)
+
+    r = random.randint(0, len(monsters) - 1)
     return monsters[r]
-            
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(create_all_monsters(4))
     print(get_random_monster(4))
-

@@ -1,4 +1,4 @@
-'''
+"""
 You are given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once.
 
 Return the single element that appears only once.
@@ -21,11 +21,11 @@ Constraints:
 
 1 <= nums.length <= 105
 0 <= nums[i] <= 105
-'''
+"""
 from typing import List
 
 
-def singleNonDuplicate( nums: List[int]) -> int:
+def singleNonDuplicate(nums: List[int]) -> int:
     # binary search on array checking num and num + index or num - index for an equivalent value, return the value that does not have a matching +- value
     # [1,2,2,4,4] vs [1,1,2,2,4]  example[1,1,2,3,3] and [1,1,2,2,3,4,4]
     # [1,2,2] vs [2,2,4]
@@ -35,40 +35,39 @@ def singleNonDuplicate( nums: List[int]) -> int:
     left = 0
     right = len(nums)
 
-    
     while len(nums[left:right]) > 3:
         breakpoint()
         midpoint = (left + right) // 2
-        if nums[midpoint] == nums[midpoint -1]:
+        if nums[midpoint] == nums[midpoint - 1]:
             if midpoint % 2 == 0:
                 right = midpoint
             else:
-                left = midpoint +1
-        elif nums[midpoint -1] != nums[midpoint] and nums[midpoint +1] != nums[midpoint]:
+                left = midpoint + 1
+        elif (
+            nums[midpoint - 1] != nums[midpoint]
+            and nums[midpoint + 1] != nums[midpoint]
+        ):
             return nums[midpoint]
         else:
             if midpoint % 2 == 0:
                 left = midpoint + 1
             else:
                 right = midpoint
-            
+
     if len(nums[left:right]) == 2:
-        
-        if nums[left-1] == nums[left]:
-            return nums[left+1]
+        if nums[left - 1] == nums[left]:
+            return nums[left + 1]
         else:
             return nums[left]
     elif len(nums[left:right]) == 1:
         return nums[left]
-    if nums[left] == nums[left+1]:
-        return nums[left+2]
+    if nums[left] == nums[left + 1]:
+        return nums[left + 2]
     else:
         return nums[left]
 
 
-
-
-'''
+"""
 
 
 
@@ -80,26 +79,29 @@ def singleNonDuplicate( nums: List[int]) -> int:
 [1,1,2,3,3]
 [1,2,2,3,3]
 [1,1,2,2,3]
-'''
+"""
+
 
 def test_one():
-    assert singleNonDuplicate([3,3,7,7,10,11,11]) == 10
+    assert singleNonDuplicate([3, 3, 7, 7, 10, 11, 11]) == 10
 
-    
+
 def test_two():
-    
-    assert singleNonDuplicate([1,1,2,3,3,4,4,8,8]) == 2
+    assert singleNonDuplicate([1, 1, 2, 3, 3, 4, 4, 8, 8]) == 2
+
 
 def test_single_value():
     assert singleNonDuplicate([1]) == 1
 
+
 def test_length_five():
-    
-    assert singleNonDuplicate([1,1,2,2,3]) == 3
-    assert singleNonDuplicate([1,2,2,3,3]) == 1
+    assert singleNonDuplicate([1, 1, 2, 2, 3]) == 3
+    assert singleNonDuplicate([1, 2, 2, 3, 3]) == 1
+
 
 def test_longer():
-    assert singleNonDuplicate([1,1,2,2,4,4,5,5,9]) == 9
+    assert singleNonDuplicate([1, 1, 2, 2, 4, 4, 5, 5, 9]) == 9
+
 
 def test_wrong_answer():
-    assert singleNonDuplicate([0,1,1,2,2,5,5]) == 0
+    assert singleNonDuplicate([0, 1, 1, 2, 2, 5, 5]) == 0

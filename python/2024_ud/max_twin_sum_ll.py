@@ -9,10 +9,10 @@ def pair_sum_ll(head: ListNode) -> int:
     current = head
     while current:
         length += 1
-        current = current.next_node
+        current = current.next
     pop_off_point = length // 2
     highest_sum = 0
-    #breakpoint()
+    # breakpoint()
     current = head
     while current:
         if pop_off_point > 0:
@@ -20,15 +20,15 @@ def pair_sum_ll(head: ListNode) -> int:
             pop_off_point -= 1
         else:
             current_sum = stack.pop() + current.val
-            highest_sum = max(current_sum, highest_sum )
-            
-        current = current.next_node
+            highest_sum = max(current_sum, highest_sum)
+
+        current = current.next
     return highest_sum
 
 
 def test_one():
-    assert pair_sum_ll(ll_builder([5,4,2,1])) == 6
+    assert pair_sum_ll(ll_builder([5, 4, 2, 1])) == 6
 
 
 def test_two():
-    assert pair_sum_ll(ll_builder([4,2,2,3])) ==  7
+    assert pair_sum_ll(ll_builder([4, 2, 2, 3])) == 7

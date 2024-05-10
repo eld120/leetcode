@@ -1,5 +1,3 @@
-
-
 def is_isomorphic(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
@@ -13,12 +11,10 @@ def is_isomorphic(s: str, t: str) -> bool:
             s_dict[char] = t[index]
             keys.add(char)
             values.add(t[index])
-        elif s_dict[char] != t[index] :
+        elif s_dict[char] != t[index]:
             return False
     return True
-    
-
 
 
 def test_badc():
-    assert is_isomorphic('badc', 'baba') == False
+    assert is_isomorphic("badc", "baba") == False

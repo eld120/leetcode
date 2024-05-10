@@ -1,8 +1,9 @@
 from typing import List
 import re
 
+
 def num_unique_email(emails: List[str]) -> int:
-    '''
+    """
     Given an array of strings emails where we send one email to each emails[i], return the number of different addresses that actually receive mails.
     Constraints:
 
@@ -13,13 +14,13 @@ def num_unique_email(emails: List[str]) -> int:
     All local and domain names are non-empty.
     Local names do not start with a '+' character.
     Domain names end with the ".com" suffix.
-    '''
+    """
     # ans_list = []
 
     # for email in emails:
-        
+
     #     found = re.match(r"^.+", email)
-        
+
     pass
 
 
@@ -37,18 +38,28 @@ def emails_no_regex(emails: List[int]) -> int:
                 at_flag = True
             elif not ignore_flag and not at_flag and char == ".":
                 continue
-            
-                
+
             if ignore_flag:
                 continue
             else:
                 temp.append(char)
         counter.add("".join(temp))
 
-    return len(counter)#, counter
+    return len(counter)  # , counter
+
 
 def test_one():
-    assert emails_no_regex(["a@leetcode.com","b@leetcode.com","c@leetcode.com"]) == 3
+    assert emails_no_regex(["a@leetcode.com", "b@leetcode.com", "c@leetcode.com"]) == 3
+
 
 def test_two():
-    assert emails_no_regex(["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"]) == 2
+    assert (
+        emails_no_regex(
+            [
+                "test.email+alex@leetcode.com",
+                "test.e.mail+bob.cathy@leetcode.com",
+                "testemail+david@lee.tcode.com",
+            ]
+        )
+        == 2
+    )

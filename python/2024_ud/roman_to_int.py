@@ -1,4 +1,4 @@
-'''
+"""
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
@@ -42,10 +42,11 @@ Constraints:
 1 <= s.length <= 15
 s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
 It is guaranteed that s is a valid roman numeral in the range [1, 3999].
-'''
+"""
 
-def romanToInt( s: str) -> int:
-    '''
+
+def romanToInt(s: str) -> int:
+    """
     Symbol       Value
     I             1
     V             5
@@ -54,42 +55,40 @@ def romanToInt( s: str) -> int:
     C             100
     D             500
     M             1000
-    I can be placed before V (5) and X (10) to make 4 and 9. 
-    X can be placed before L (50) and C (100) to make 40 and 90. 
+    I can be placed before V (5) and X (10) to make 4 and 9.
+    X can be placed before L (50) and C (100) to make 40 and 90.
     C can be placed before D (500) and M (1000) to make 400 and 900.
     Given a roman numeral, convert it to an integer.
 
     2 jobs
     - add stuff together
     - match patterns
-    '''
-    roman_nums = {
-        'I' : 1,
-        'V' : 5,
-        'X' : 10,
-        'L' : 50,
-        'C' : 100,
-        'D' : 500,
-        'M' : 1000        
-    }
-    subtraction_suffix = {'IX':9,'IV':4,'XL':40, 'XC':90, 'CD':400,'CM':900 }
+    """
+    roman_nums = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    subtraction_suffix = {"IX": 9, "IV": 4, "XL": 40, "XC": 90, "CD": 400, "CM": 900}
     number = 0
     for index, val in enumerate(s):
-        if index > 0 and s[index-1]+val in subtraction_suffix.keys():
-            number = number + subtraction_suffix[s[index-1]+val]
+        if index > 0 and s[index - 1] + val in subtraction_suffix.keys():
+            number = number + subtraction_suffix[s[index - 1] + val]
         else:
-            if index < len(s) -1 and val+s[index+1] not in subtraction_suffix.keys():
+            if (
+                index < len(s) - 1
+                and val + s[index + 1] not in subtraction_suffix.keys()
+            ):
                 number = number + roman_nums[val]
-            elif index == len(s) -1:
+            elif index == len(s) - 1:
                 number = number + roman_nums[val]
-    
+
     return number
 
+
 def test_three():
-    assert romanToInt('III') == 3
+    assert romanToInt("III") == 3
+
 
 def test_fifty_eight():
-    assert romanToInt('LVIII') == 58
+    assert romanToInt("LVIII") == 58
+
 
 def test_nineteen_ninety_four():
-    assert romanToInt('MCMXCIV') == 1994
+    assert romanToInt("MCMXCIV") == 1994

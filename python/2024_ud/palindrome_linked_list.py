@@ -1,4 +1,4 @@
-'''
+"""
 Given the head of a singly linked list, return true if it is a 
 palindrome
  or false otherwise.
@@ -24,7 +24,7 @@ The number of nodes in the list is in the range [1, 105].
  
 
 Follow up: Could you do it in O(n) time and O(1) space?
-'''
+"""
 from typing import Optional
 
 
@@ -34,17 +34,18 @@ class ListNode:
         self.next = next
 
     def __str__(self) -> str:
-        return f'val: {self.val}, next: {self.next}'
-    def __repr__(self) -> str:
-        return f'val: {self.val}, next: {self.next}'
+        return f"val: {self.val}, next: {self.next}"
 
-def isPalindrome( head: Optional[ListNode]) -> bool:
+    def __repr__(self) -> str:
+        return f"val: {self.val}, next: {self.next}"
+
+
+def isPalindrome(head: Optional[ListNode]) -> bool:
     if not head.next:
         return True
-    
+
     numbers = []
     while head and head.next:
-        
         numbers.append(head.val)
         head = head.next
     numbers.append(head.val)
@@ -53,7 +54,10 @@ def isPalindrome( head: Optional[ListNode]) -> bool:
 
 
 def test_one():
-    assert isPalindrome(ListNode(1, ListNode(2, ListNode(2, ListNode(1, None))))) == True
+    assert (
+        isPalindrome(ListNode(1, ListNode(2, ListNode(2, ListNode(1, None))))) == True
+    )
+
 
 def test_two():
     assert isPalindrome(ListNode(1, ListNode(2, None))) == False

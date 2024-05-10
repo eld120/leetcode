@@ -1,4 +1,4 @@
-'''
+"""
 We are playing the Guess Game. The game is as follows:
 
 I pick a number from 1 to n. You have to guess which number I picked.
@@ -32,7 +32,8 @@ Constraints:
 
 1 <= n <= 231 - 1
 1 <= pick <= n
-'''
+"""
+
 
 def guessNumber(n: int) -> int:
     # [1,2,3,4,5]
@@ -47,5 +48,5 @@ def guessNumber(n: int) -> int:
             right = mid
         else:
             left = mid + 1
-    
+
     return left

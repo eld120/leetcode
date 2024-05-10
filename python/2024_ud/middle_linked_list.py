@@ -1,4 +1,4 @@
-'''
+"""
 Given the head of a singly linked list, return the middle node of the linked list.
 
 If there are two middle nodes, return the second middle node.
@@ -23,8 +23,9 @@ Constraints:
 
 The number of nodes in the list is in the range [1, 100].
 1 <= Node.val <= 100
-'''
+"""
 from typing import Optional
+
 
 class ListNode:
     def __init__(self, val, next) -> None:
@@ -32,15 +33,13 @@ class ListNode:
         self._next = next
 
 
-def middleNode( head: Optional[ListNode]) -> Optional[ListNode]:
+def middleNode(head: Optional[ListNode]) -> Optional[ListNode]:
     fast = head
     slow = head
     while fast:
-        
-        if fast.next:    
+        if fast.next:
             fast = fast.next.next
         else:
             return slow
         slow = slow.next
     return slow
-

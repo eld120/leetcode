@@ -1,7 +1,4 @@
-
-
 class LeetcodeStack:
-
     def __init__(self) -> None:
         self.container = []
 
@@ -10,7 +7,6 @@ class LeetcodeStack:
 
     def pop(self) -> int:
         return self.container.pop()
-        
 
     def top(self) -> int:
         return self.container[-1]

@@ -1,7 +1,5 @@
-
-
 def prohibited_stings(prohibited: list[str], username: str) -> bool:
-    '''
+    """
     Write a function that takes two arguments, a list of prohibited strings and a username, and returns a boolean of whether or not the username contains any of the prohibited strings.
 
     Some important details:
@@ -13,17 +11,16 @@ def prohibited_stings(prohibited: list[str], username: str) -> bool:
         - I becomes 1
         - O becomes 0
         - For example, if “darn” is a prohibited word, “d4rn” is also a prohibited word. If “darn” and “heck” are prohibited words, the username “D4RN_y0u_T0_h3ck” contains prohibited words.
-    '''
+    """
     # insert lowercase values of prohibited strings into set
     # prohibited_set = {set(x.lower()) for x in prohibited}
     prohibited_ = [name.split() for name in prohibited]
     # split username into a list of characters
     username_chars = [char.lower() for char in username]
     # dict of specific letter substitutions
-    letter_substitutions = {4: 'a', 3: 'e', 1: 'i', 0: 'o'}
+    letter_substitutions = {4: "a", 3: "e", 1: "i", 0: "o"}
     # checking substring.lower() of username is in prohibited
     for name in prohibited:
-        
         left = 0
         right = 1
         prohibited_sub = name.split()
@@ -37,23 +34,21 @@ def prohibited_stings(prohibited: list[str], username: str) -> bool:
             if prohibited_sub[left:right] in username.lower():
                 pass
             # xDarn
-        
-        
+
         # if _ is the first of both username and prohibited - contin
-    
+
         # continue to check the first char of all other prohibited strings
         # if we find a prohibited string return True
-                
 
 
 def proh_strs(prohibited: list[str], username: str) -> bool:
-    conversions = {4: 'a', 3: 'e', 1: 'i', 0: 'o'}
-    
+    conversions = {4: "a", 3: "e", 1: "i", 0: "o"}
+
     prohibited = [x.lower() for x in prohibited]
-    
+
     username_list = [s.lower() for s in username]
     for i, char in enumerate(username_list):
-        if char in '0123456789' and int(char) in conversions:
+        if char in "0123456789" and int(char) in conversions:
             username_list[i] = conversions[int(char)]
     user = "".join(username_list)
     for word in prohibited:
@@ -61,11 +56,14 @@ def proh_strs(prohibited: list[str], username: str) -> bool:
             return True
     return False
 
+
 def test_username_contains_bad_words():
-    assert proh_strs(['damn', 'shit'], 'fuckshitdamn') == True
+    assert proh_strs(["damn", "shit"], "fuckshitdamn") == True
+
 
 def test_username_valid():
-    assert proh_strs(['damn', 'ass'], 'Danny') == False
+    assert proh_strs(["damn", "ass"], "Danny") == False
+
 
 def test_prohibited_at_beginning():
-    assert proh_strs(['damn', 'fuck'], 'd4mnshitdam') == True
+    assert proh_strs(["damn", "fuck"], "d4mnshitdam") == True

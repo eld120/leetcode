@@ -1,4 +1,4 @@
-'''
+"""
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
 
  
@@ -21,8 +21,9 @@ Constraints:
 
 1 <= s.length <= 105
 s consists of only lowercase English letters.
-'''
+"""
 from collections import Counter
+
 
 def firstUniqChar(s: str) -> int:
     char_count = Counter(s)
@@ -30,30 +31,33 @@ def firstUniqChar(s: str) -> int:
     for index, char in enumerate(s):
         if char_count[char] == 1:
             return index
-        
+
     return -1
-           
-def first_unique_char(s:str):
+
+
+def first_unique_char(s: str):
     # if len(s) == 1:
     #     return 0
     for index, char in enumerate(s):
         for inner_index, inner_char in enumerate(s):
             if inner_index == index:
-                if inner_index == len(s) -1 and index ==  len(s) -1:
+                if inner_index == len(s) - 1 and index == len(s) - 1:
                     return index
                 continue
             elif char == inner_char:
                 break
-            elif inner_index == len(s) -1:
+            elif inner_index == len(s) - 1:
                 return index
     return -1
 
 
 def test_one():
-    assert firstUniqChar('leetcode') == 0
+    assert firstUniqChar("leetcode") == 0
+
 
 def test_two():
-    assert firstUniqChar('loveleetcode') == 2
+    assert firstUniqChar("loveleetcode") == 2
+
 
 def test_three():
-    assert firstUniqChar('aabb') == -1
+    assert firstUniqChar("aabb") == -1

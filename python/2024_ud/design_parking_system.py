@@ -1,19 +1,9 @@
-
-
-
-
-
 class ParkingSystem:
-
     def __init__(self, big: int, medium: int, small: int):
         # self.big = 1
         # self.medium = 2
         # self.small = 3
-        self._spots = {
-            1 : big,
-            2 : medium,
-            3 : small
-                       }
+        self._spots = {1: big, 2: medium, 3: small}
 
     def addCar(self, carType: int) -> bool:
         try:
@@ -31,7 +21,7 @@ class ParkingSystem:
 
 
 def test_one():
-    system = ParkingSystem(1,1,0)
+    system = ParkingSystem(1, 1, 0)
     system.addCar(1) == True
     system.addCar(2) == True
     system.addCar(3) == False

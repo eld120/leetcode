@@ -1,4 +1,4 @@
-'''
+"""
 You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
 
 You can either start from the step with index 0, or the step with index 1.
@@ -33,24 +33,22 @@ Constraints:
 2 <= cost.length <= 1000
 0 <= cost[i] <= 999
 
-'''
+"""
 
 
 def min_cost_climbing_stairs(cost: list[int]) -> int:
     cost_tracker = [cost[0], cost[1]]
     lowest = float("inf")
     for index, val in enumerate(cost):
-        if index > 1: 
+        if index > 1:
             lowest = min(cost_tracker[-1], cost_tracker[-2])
             cost_tracker.append(val + lowest)
     return cost_tracker[-2] if cost_tracker[-2] < cost_tracker[-1] else cost_tracker[-1]
-            
-    
 
 
 def test_one():
-    assert min_cost_climbing_stairs([10,15,20]) == 15
+    assert min_cost_climbing_stairs([10, 15, 20]) == 15
 
 
 def test_two():
-    assert min_cost_climbing_stairs([1,100,1,1,1,100,1,1,100,1]) == 6
+    assert min_cost_climbing_stairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]) == 6

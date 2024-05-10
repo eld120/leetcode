@@ -1,4 +1,4 @@
-'''
+"""
 Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
 
 There is only one repeated number in nums, return this repeated number.
@@ -27,22 +27,26 @@ Follow up:
 How can we prove that at least one duplicate number must exist in nums?
 Can you solve the problem in linear runtime complexity?
 
-'''
+"""
 from typing import List
 
 
-def findDuplicate( nums: List[int]) -> int:
+def findDuplicate(nums: List[int]) -> int:
     nums.sort()
-    
+
     fast = 1
     for num in nums:
         if num == nums[fast]:
-            return  nums[fast]
+            return nums[fast]
         fast += 1
 
+
 from collections import Counter
+
+
 def find_duplicate(nums: List[int]) -> int:
     return Counter(nums).most_common(1)[0][0]
+
 
 def find_duplicates_again(nums: List[int]) -> int:
     duplicates = set()
@@ -51,4 +55,3 @@ def find_duplicates_again(nums: List[int]) -> int:
             duplicates.add(num)
         else:
             return num
-    

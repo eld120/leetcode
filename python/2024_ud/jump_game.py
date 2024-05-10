@@ -28,10 +28,10 @@ from typing import List
 
 
 def jump_game(nums) -> bool:
-    '''
+    """
     need to figure out if we can jump to the end quickly
 
-    '''
+    """
     can_jump = True
     if 0 not in set(nums) or len(nums) == 1:
         return can_jump
@@ -73,23 +73,21 @@ def jump_game(nums) -> bool:
     return can_jump
 
 
-
-
 def jump_two(rando_list: List[int]) -> bool:
-    '''
+    """
     need to determine if there's a way to jump to the last index based on the values within the list
     ex:
     [3, 2, 1, 0, 4] -> False
     [0] -> True
     [1,0] -> True
     [2,0,0] -> True
-    '''
+    """
     jumps = 0
     index = 0
     for val in rando_list:
         if jumps < val:
             jumps = val
-        if val == 0 and jumps < 1 and len(rando_list) -1 > index:
+        if val == 0 and jumps < 1 and len(rando_list) - 1 > index:
             return False
 
         jumps -= 1
