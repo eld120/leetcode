@@ -20,6 +20,8 @@ class ListNode:
 class LRUCache:
 
     def __init__(self, capacity: int):
+        if capacity < 1:
+            raise ValueError
         self.capacity = capacity
         self.lookup = dict()
 
@@ -27,27 +29,20 @@ class LRUCache:
         self.tail = self.head
 
     def get(self, key: int) -> int:
-        # if key exists within dict return val
         if key in self.lookup:
-            # update/move node to end of LL
-            # prev = node.prev, prev.next = node.next
             self.move_to_end(key)
             return self.lookup[key].val
             # next = node.next, next.prev = prev
-            # tail.next = node, node.prev = tail, node.next = None, tail = node
-            # return self.lookup[key].val
         return -1
 
     def move_to_end(self, key):
         if key in self.lookup:
             node = self.lookup[key]
-            # node is in middle of LL
             if node.prev is not None and node.next is not None:
                 prev = node.prev
                 prev.next = node.next
                 next = prev.next
                 next.prev = prev
-            # node is head  
             elif node.prev is None and node.next is not None:
                 self.head = node.next
                 self.head.prev = None
@@ -87,3 +82,6 @@ def test_one():
     Output
     [null, null, null, 1, null, -1, null, -1, 3, 4]
     '''
+    pass
+
+
