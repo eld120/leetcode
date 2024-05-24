@@ -2,6 +2,68 @@ import datetime
 from collections import OrderedDict, defaultdict
 
 
+# class LFUCache:
+#     '''
+#     works but doesn't meet the O(1) average time complexity 
+#     '''
+#     def __init__(self, capacity: int):
+#         self.capacity = capacity
+#         self.lookup = OrderedDict()
+#         # track key, value, frequency, and timestamp?
+#         # {key: key, value: value, frequency: int, timestamp: float}
+#         self.timestamp = 0
+
+#     def get(self, key: int) -> int:
+#         if key in self.lookup:
+#             self.lookup[key]['frequency'] += 1
+#             self.lookup[key]['timestamp'] = self.timestamp
+#             self.timestamp += 1
+#             self.lookup.move_to_end(key, last=False)
+#             return self.lookup[key]['value']
+#         return -1
+        
+
+#     def put(self, key: int, value: int) -> None:
+#         if key in self.lookup:
+#             self.lookup[key]['frequency'] += 1
+#             self.lookup[key]['timestamp'] = self.timestamp
+#             self.timestamp += 1
+#             self.lookup[key]['value'] = value
+#             self.lookup.move_to_end(key, last=False)
+#         else:
+#             if len(self.lookup) == self.capacity:
+#                 lowest_freq = float('inf')
+#                 least_frequently_used_objects = []
+#                 for _, obj in self.lookup.items():
+#                     if obj['frequency'] < lowest_freq:
+#                         least_frequently_used_objects = []
+#                         lowest_freq = obj['frequency']
+#                         least_frequently_used_objects.append(obj)
+#                     elif obj['frequency'] == lowest_freq:
+#                         least_frequently_used_objects.append(obj)
+#                 if len(least_frequently_used_objects) > 1:
+#                     oldest_record = float('inf')
+#                     remove_me = None
+#                     for obj in least_frequently_used_objects:
+#                         if obj['timestamp'] < oldest_record:
+#                             oldest_record = obj['timestamp']
+#                             remove_me = obj
+#                     #breakpoint()
+#                     del self.lookup[remove_me['key']]
+#                 else:
+#                     #breakpoint()
+#                     del self.lookup[least_frequently_used_objects[0]['key']]
+#             self.lookup[key] = {
+#                 'key': key,
+#                 'value': value,
+#                 'frequency' : 1,
+#                 'timestamp' : self.timestamp
+#             }
+#             self.timestamp += 1
+#             self.lookup.move_to_end(key, last=False)
+            
+
+
 class LFUCache:
     '''
     Implement the LFUCache class:
@@ -106,3 +168,4 @@ def test_example():
             assert cache.get(val[0]) == answer_array[index]
         else:
             assert cache.put(val[0], val[1]) == answer_array[index]
+
