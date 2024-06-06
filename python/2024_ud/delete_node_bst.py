@@ -197,14 +197,19 @@ def del_node_again(root: TreeNode, key: int) -> TreeNode:
         # node has one child
         elif root.left or root.right:
             if root.left:
-                root.left = del_node_again(root.left, key)
+                temp = root.left
+                del root
+                return temp
+                
             else:
-                root.right = del_node_again(root.right, key)
+                temp = root.right
+                del root
+                return temp
             # swap values between node and child, but del child
         # node has no children
         else:
             # delete node and return none            
-            del root
+            root = None
             return None
     # if node.val > key
     elif root.val > key:
@@ -216,3 +221,7 @@ def del_node_again(root: TreeNode, key: int) -> TreeNode:
         root.right = del_node_again(root.right, key)
     return root
 
+
+
+def test_60():
+    assert del_node_again(tree_builder_list([5,3,6,2,4,None,7]), 5) == TreeNode(6, TreeNode(3, TreeNode(2), TreeNode(4)), TreeNode(7))
