@@ -69,7 +69,7 @@ def shortest_path(n: int, edges: list[list[int]], src: int) -> dict[int, int]:
     return result
 
 
-def shortest_recursive(n: int, edges: list[list[int]], src: int) -> dict[int, int]:
+def shortest_iterative(n: int, edges: list[list[int]], src: int) -> dict[int, int]:
     '''
     Set all vertices distances = infinity except for the source vertex, set the source distance = 0
     
@@ -115,6 +115,46 @@ def shortest_recursive(n: int, edges: list[list[int]], src: int) -> dict[int, in
     return visited
         
 
+def shortest_recursive(n: int, edges: list[list[int]], src: int) -> dict:
+    '''
+    Set all vertices distances = infinity except for the source vertex, set the source distance = 0
+    
+    Push the source vertex in a min-priority queue in the form (distance , vertex), as the comparison in the min-priority queue will be according to vertices distances.
+    Pop the vertex with the minimum distance from the priority queue (at first the popped vertex = source).
+    Update the distances of the connected vertices to the popped vertex in case of "current vertex distance + edge weight < next vertex distance", then push the vertex
+    with the new distance to the priority queue.
+    If the popped vertex is visited before, just continue without using it.
+    Apply the same algorithm again until the priority queue is empty.
+    '''
+    graph = dict()
+    for origin, destination, weight in edges:
+        if origin in graph:
+            graph[origin].append((weight, destination))
+        else:
+            graph[origin] = [(weight, destination)]
+
+    visited = {src: 0}
+    unvisited = []
+    heapq.heapify(unvisited)
+    heapq.heappush(unvisited, (0, src))
+    def recurse(node, distance):
+        if node in graph:
+            for added_distance, current_node in graph[node]:
+                if current_node not in visited or added_distance + distance < visited[current_node]:
+                    visited[current_node] = added_distance + distance
+                    heapq.heappush(unvisited, (added_distance + distance, current_node))
+        if unvisited:
+            new_weight, new_node = heapq.heappop(unvisited)
+            recurse(new_node, new_weight)
+    recurse(src, 0)
+    for i in range(n):
+        if i not in visited:
+            visited[i] = -1
+    return visited
+
+
+        
+
 
 
 def test_one():
@@ -140,32 +180,3 @@ def test_three():
     assert shortest_recursive(4, [[0,1,5],[0,2,7],[1,2,2],[1,3,6],[2,3,4]], 1) == {0:-1, 1:0, 2:2, 3:6}
 
 
-def shortestPath( n: int, edges: list[list[int]], src: int) -> dict[int, int]:
-        '''neetcode did this'''
-        adj = {}
-        for i in range(n):
-            adj[i] = []
-            
-        # s = src, d = dst, w = weight
-        for s, d, w in edges:
-            adj[s].append([d, w])
-
-        # Compute shortest paths
-        shortest = {}
-        minHeap = [[0, src]]
-        while minHeap:
-            w1, n1 = heapq.heappop(minHeap)
-            if n1 in shortest:
-                continue
-            shortest[n1] = w1
-
-            for n2, w2 in adj[n1]:
-                if n2 not in shortest:
-                    heapq.heappush(minHeap, [w1 + w2, n2])
-        
-        # Fill in missing nodes
-        for i in range(n):
-            if i not in shortest:
-                shortest[i] = -1
-
-        return shortest
