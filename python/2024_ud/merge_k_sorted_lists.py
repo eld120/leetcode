@@ -82,3 +82,27 @@ def ll_builder(array):
 def test_one():
     ll = [ll_builder([1,4,5]),ll_builder([1,3,4]),ll_builder([2,6])]
     assert mergeKLists(ll) == ll_builder([1,1,2,3,4,4,5,6])
+
+
+
+
+import heapq
+def solution_two(lists):
+    heapy = []
+    heapq.heapify(heapy)
+    for head in lists:
+        current = head
+        while current is not None:
+            heapq.heappush(heapy, current.val)
+            current = current.next
+    head = ListNode()
+    curr = head
+    while heapy:
+        curr.next = ListNode(heapq.heappop(heapy))
+        curr = curr.next
+    return head.next
+
+
+def test_on2e():
+    ll = [ll_builder([1,4,5]),ll_builder([1,3,4]),ll_builder([2,6])]
+    assert mergeKLists(ll) == ll_builder([1,1,2,3,4,4,5,6])
